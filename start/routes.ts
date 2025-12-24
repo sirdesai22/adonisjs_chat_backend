@@ -10,6 +10,7 @@
 import router from '@adonisjs/core/services/router'
 const AuthController = () => import('#controllers/auth_controller')
 const ConversationController = () => import('#controllers/conversation_controller')
+const MessageController = () => import('#controllers/message_controller')
 
 router.get('/', async () => {
   return {
@@ -37,5 +38,12 @@ router
       ConversationController,
       'removeParticipant',
     ])
+
+    // Message routes
+    router.get('/conversations/:id/messages', [MessageController, 'index'])
+    router.post('/conversations/:id/messages', [MessageController, 'store'])
+    router.get('/messages/:id', [MessageController, 'show'])
+    router.put('/messages/:id', [MessageController, 'update'])
+    router.delete('/messages/:id', [MessageController, 'destroy'])
   })
   .use('auth')
