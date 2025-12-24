@@ -21,8 +21,8 @@ router.get('/', async () => {
 // Authentication routes
 router.post('/auth/register', [AuthController, 'register'])
 router.post('/auth/login', [AuthController, 'login'])
-router.post('/auth/refresh', [AuthController, 'refresh']).use('auth')
-router.post('/auth/logout', [AuthController, 'logout']).use('auth')
+router.post('/auth/refresh', [AuthController, 'refresh']).use('auth' as any)
+router.post('/auth/logout', [AuthController, 'logout']).use('auth' as any)
 router.post('/auth/guest', [AuthController, 'guest'])
 
 // Conversation routes (all require authentication)
@@ -46,4 +46,4 @@ router
     router.put('/messages/:id', [MessageController, 'update'])
     router.delete('/messages/:id', [MessageController, 'destroy'])
   })
-  .use('auth')
+  .use('auth' as any)

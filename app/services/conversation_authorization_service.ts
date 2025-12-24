@@ -1,6 +1,6 @@
 import Conversation from '#models/conversation'
 import ConversationParticipant from '#models/conversation_participant'
-import type { User } from '#models/user'
+// import type { User } from '#models/user'
 
 export default class ConversationAuthorizationService {
   /**
