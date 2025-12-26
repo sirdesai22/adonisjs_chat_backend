@@ -159,50 +159,6 @@ graph TB
     style Database fill:#e3f2fd
 ```
 
-### Request Flow Sequence
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Middleware
-    participant Route
-    participant Controller
-    participant Validator
-    participant AuthService
-    participant Model
-    participant ORM
-    participant Database
-    
-    Client->>Middleware: HTTP Request
-    Middleware->>Middleware: CORS, Body Parser, Auth Init
-    Middleware->>Route: Route Matching
-    
-    Route->>Controller: Route Handler
-    Controller->>Validator: Validate Input
-    Validator-->>Controller: Validated Data
-    
-    Controller->>AuthService: Check Authorization
-    AuthService->>Model: Query User/Participant
-    Model->>ORM: Database Query
-    ORM->>Database: SQL Query
-    Database-->>ORM: Results
-    ORM-->>Model: Data
-    Model-->>AuthService: Authorization Result
-    AuthService-->>Controller: Authorized/Denied
-    
-    alt Authorized
-        Controller->>Model: Business Logic
-        Model->>ORM: Database Operation
-        ORM->>Database: SQL Query
-        Database-->>ORM: Results
-        ORM-->>Model: Data
-        Model-->>Controller: Response Data
-        Controller-->>Client: 200 OK + Data
-    else Unauthorized
-        Controller-->>Client: 403 Forbidden
-    end
-```
-
 ### Data Flow Summary
 
 1. **Request Flow**:
@@ -406,12 +362,12 @@ Configure the following environment variables in `.env`:
 # Application
 NODE_ENV=development
 PORT=3333
-HOST=0.0.0.0
+HOST=localhost
 APP_KEY=your-32-character-secret-key-here
 LOG_LEVEL=info
 
 # Database
-DB_HOST=localhost
+DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_USER=your_db_user
 DB_PASSWORD=your_db_password
@@ -557,14 +513,6 @@ npm run typecheck
 - **Input Validation**: All inputs validated using VineJS schemas
 - **SQL Injection Protection**: Parameterized queries via Lucid ORM
 - **CORS Configuration**: Configurable cross-origin resource sharing
-
-## 📝 License
-
-UNLICENSED
-
-## 🤝 Contributing
-
-This is a project assignment. For questions or issues, please contact the project maintainer.
 
 ---
 
