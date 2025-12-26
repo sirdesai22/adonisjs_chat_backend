@@ -3,6 +3,7 @@ import Message from '#models/message'
 import Conversation from '#models/conversation'
 import ConversationAuthorizationService from '#services/conversation_authorization_service'
 import { createMessageValidator, updateMessageValidator } from '#validators/message_validator'
+import { DateTime } from 'luxon'
 
 export default class MessageController {
   async index({ auth, params, request, response }: HttpContext) {
@@ -144,7 +145,7 @@ export default class MessageController {
     }
 
     message.content = payload.content
-    message.editedAt = new Date()
+    message.editedAt = DateTime.now()
     await message.save()
 
     await message.load('user', (query) => {
