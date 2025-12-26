@@ -8,6 +8,7 @@ import {
   updateConversationValidator,
   addParticipantValidator,
 } from '#validators/conversation_validator'
+import { DateTime } from 'luxon'
 
 export default class ConversationController {
   async index({ auth, response }: HttpContext) {
@@ -45,7 +46,7 @@ export default class ConversationController {
     await ConversationParticipant.create({
       conversationId: conversation.id,
       userId: user.id,
-      joinedAt: new Date(),
+      joinedAt: DateTime.now(),
     })
 
     // Add other participants
@@ -61,7 +62,7 @@ export default class ConversationController {
         participantIds.map((userId) => ({
           conversationId: conversation.id,
           userId,
-          joinedAt: new Date(),
+          joinedAt: DateTime.now(),
         }))
       )
     }
@@ -186,7 +187,7 @@ export default class ConversationController {
       await ConversationParticipant.create({
         conversationId,
         userId,
-        joinedAt: new Date(),
+        joinedAt: DateTime.now(),
       })
 
       return response.ok({ message: 'Participant added successfully' })
