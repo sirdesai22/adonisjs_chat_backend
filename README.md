@@ -520,6 +520,9 @@ All protected endpoints require a Bearer token in the Authorization header:
 Authorization: Bearer <your-access-token>
 ```
 
+### Postman Collection 
+[Postman Collection Link](https://planetary-firefly-365508.postman.co/workspace/My-Workspace~94a1c850-2273-4ade-8e11-afd1d2e3560a/collection/26586411-f1a3dddb-e343-4390-ba70-2ef8d7780e99?action=share&creator=26586411)
+
 ## 🧪 Development Scripts
 
 ```bash
